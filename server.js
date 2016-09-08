@@ -21,16 +21,16 @@ console.log(process.env.TWITTER_ACCESS_TOKEN_KEY);
 console.log(process.env.TWITTER_ACCESS_TOKEN_SECRET);
 
 client.stream('statuses/filter', {track: 'Cruz'}, function(stream) {
-  stream.on('data', function(tweet) {
+stream.on('data', function(tweet) {
     console.log(tweet.text);
   });
  
-  stream.on('error', function(error) {
+stream.on('error', function(error) {
     throw error;
   });
   
 });
-server.listen(process.env.PORT ||3000,process.env.IP||"0.0.0.0",function(){
+    server.listen(process.env.PORT ||3000,process.env.IP||"0.0.0.0",function(){
     var addr=server.address();
     console.log("Quick stack backend listening at",addr.address +":"+ addr.port);
 });
