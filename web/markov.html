@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>markv sentence</title>
+<style type="text/css">
+select{
+	position:absolute;
+	left:30px;
+	top:86px;
+	height:50px;
+}
+body{
+	color:white;
+	background-color:black;
+}
+p{
+	margin:0 auto;
+}
+#L1{
+	background-color:black ;
+	margin:0 auto;
+	position:relative;
+	width:1250px;
+	height:700px;
+}
+.down{
+	top:35%;	
+}
+#title{
+	
+	position:absolute;
+	font-family:Apple Chancery;
+	left:325px;
+	
+	height:80px;
+	width:600px;
+}
+#title_h{
+	color:grey;
+	font-size:250%;
+	width:600px;
+	text-align:center;
+}
+#L2-2{
+	 
+	position:absolute;
+	left:0px;
+	top:150px;
+	width:1250px;
+	height:600px;
+}
+.up{
+	width:1200px;
+	height:160px;
+	
+}
+#s{
+	position:absolute;
+	left:300px;
+	width:650px;
+	height:60px;
+}
+#text{
+position:absolute;
+	left:330px;
+	top:130px;
+	width:600px;
+	height:500px;
+}
+#user_search{
+	position:absolute;
+	top:0.37%;
+	left:25px;
+	color:grey;
+	font-style:italic;
+	font-size:25px;
+	width:494px;
+	height:50px;
+	border-color:#63B8FF;
+
+}
+#search_button{
+	position:absolute;
+	top:0.37%;
+	right:25px;
+	background-color: #63B8FF;
+	border:none;
+	color:white;
+	width:100px;
+	height:56px;
+	padding:0 0 -10px 0;
+}
+#searching_span{
+    position:absolute;
+    font-size:12px;
+    font-family:Chalkboard SE;
+    color:red;
+    top:106px;
+    left:30px;
+}
+#input_span{
+    position:absolute;
+    font-size:12px;
+    color:red;
+    font-family:Chalkboard SE;
+    left:30px;
+    top:60px;
+}
+footer{
+	color:white;
+	width:1250;
+	background-color:black;
+	font-family:Chalkboard SE;
+	text-align:center;
+}
+#trump{
+	position:absolute;
+	top:120px;
+	left:40px;
+	width:215px;
+	height:240px;
+}
+#clinton{
+	width:200px;
+	height:240px;
+	position:absolute;
+	right:40px;
+	top:120px;
+}
+#twitter{
+	position:absolute;
+	width:100px;
+	height:100px;
+	top:30px;
+	left:100px;
+}
+
+.up_s{
+		
+}
+</style>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#text").hide();
+	/*add search button function*/
+	$("#search_button").click(function(){
+		$("#title").removeClass("down");
+		$("#s").removeClass("down");
+		$("#text").show();
+		var flag=0;
+		var userId=$("#user_search").val().trim();
+		var m_length= $("#select_length").val();
+		if(m_length=="select Marcove length"){
+			console.log(1);
+			flag=1;
+			$("#searching_span").html("Please select a Markov length");
+		}
+		console.log(userId);
+		if(userId==""||userId=="Type Twitter username here..."){
+		    flag=1;
+		    console.log("2");
+		    $("#input_span").html("Please insert a valid username");
+		    $("#user_search").val("Type Twitter username here...");
+		}
+		if(flag==0){
+			$.ajax({
+				url:"test.js",
+				type:"post",
+				data:{"userId":userId},
+				dataType:"json"
+			});
+			$.ajax({
+				
+			});
+			}
+	});
+	$("#user_search").click(function(){
+		$("#input_span").html("");
+		var judge = $(this).val();
+		if(judge=="Type Twitter username here..."){
+		$(this).val("");
+		}
+	});
+	
+	$("#user_search").blur(function(){
+	   if($(this).val()==""){
+	       $(this).val("Type Twitter username here...")
+	   } 
+	});
+	
+	$("#select_length").click(function() {
+	   $("#searching_span").html(""); 
+	});
+	
+});
+</script>	
+</head>
+<body>
+<div id="L1">
+<div class="up">
+	<img src="twitter.png" id = "twitter"></img>
+	<div id = "title" class="down">
+	<h1 id="title_h">Markov sentence generator</h1>
+	</div>
+</div>
+
+	
+		<div id="L2-2">
+			<div id="s" class="down">
+				<input type="text" value = "Type Twitter username here..." id="user_search"> 
+				<input type="button" value="search" id = "search_button"/>
+				<span id="input_span"></span>
+				<select id="select_length">
+					<option>select Marcove length</option>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+					<option>7</option>
+					<option>8</option>
+					<option>9</option>
+					<option>10</option>
+				</select>
+				<span id="searching_span"></span>
+			</div>
+				<img src="trump1.png" id="trump"></img>
+				<div id="text">
+				<p id="t" >
+					dkflsdfdklsjfl
+				</p>
+				</div>
+				<img src="clinton1.png" id="clinton"></img>
+			
+		</div>
+	</div>
+
+</body>
+<footer>
+	&copy Shouzhi Huang, Zicheng Liu, Yuhao Peng, Ruikai Zheng
+</footer>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
+        <script>
+         
+function send(){
+    $.ajax
+({
+  type: "POST",
+  url: "test2.js",
+  crossDomain:true, 
+  dataType: "json",
+  data:JSON.stringify({name: "Dennis", address: {city: "Dub", country: "IE"}})
+ }).done(function ( data ) {
+      alert("ajax callback response:"+JSON.stringify(data));
+   }
+   );
+    
+}
+
+
+        </script>
+    </head>
+    <body>
+        <button onclick="send()" >Click Me!</button>
+    </body>
+</html>
+
+
+$.ajax({
+    type: 'GET',
+    url: 'door.validate',
+    data: {
+        jsonData: "{ \"foo\": \"bar\", \"foo2\": 3 }"
+        // or jsonData: JSON.stringify(credentials)   (newest browsers only)
+    },
+    dataType: 'json',
+    complete: function(validationResponse) {
+        ...
+    }
+});
